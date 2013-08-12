@@ -2,7 +2,7 @@
 /*
 Plugin Name: Tappd
 Description: Plugin to utilize Untappd's API
-Version: 1.0
+Version: 1.0.2
 Author: Digital Relativity
 Author URI: http://digitalrelativity.com/
 Plugin URI: http://digitalrelativity.com/untappd-wordpress-plugin/
