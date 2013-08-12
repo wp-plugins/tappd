@@ -2,7 +2,7 @@
 /*
 Plugin Name: Tappd
 Description: Plugin to utilize Untappd's API
-Version: 1.0.2
+Version: 1.0.3
 Author: Digital Relativity
 Author URI: http://digitalrelativity.com/
 Plugin URI: http://digitalrelativity.com/untappd-wordpress-plugin/
@@ -602,7 +602,7 @@ function DRTappd_admin() {
 	include('tappd-admin.php');
 }
 function DRTappd_admin_actions() {
-    add_menu_page("Tappd", "Tappd", 1, "Tappd", "DRTappd_admin", plugins_url('img/dradminlogo.png', __FILE__));
+    add_menu_page("Tappd", "Tappd", "moderate_comments", "Tappd", "DRTappd_admin", plugins_url('img/dradminlogo.png', __FILE__));
 }
 
 //  ******     HOOKS      *****  //
@@ -623,15 +623,6 @@ register_sidebar_widget( 'Untappd venueFeed', 'widget_myVenueFeed');
 register_sidebar_widget( 'Untappd userFeed', 'widget_myUserFeed');
 
 add_action( 'wp_enqueue_scripts', 'DR_add_stylesheet' );
-
-global $user_ID; if( $user_ID ) :
-if( current_user_can('level_9') ) :
- 
-	add_action( 'admin_init', 'DR_add_admin_stylesheet' );
-	add_action('admin_menu', 'DRTappd_admin_actions');
-
-else :
-endif;
-endif;
-
+add_action( 'admin_init', 'DR_add_admin_stylesheet' );
+add_action('admin_menu', 'DRTappd_admin_actions');
 ?>
