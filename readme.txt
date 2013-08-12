@@ -18,7 +18,7 @@ Tappd is a Wordpress plugin dedicated to displaying different types of feeds fro
 1. Upload the `tappd` folder to the `/wp-content/plugins/` directory
 1. Activate the plugin through the 'Plugins' menu in WordPress
 1. Sign Up for an API key. (http://untappd.com/api/register)
-1. Enter API settings on Tappd's Settings Page.
+1. Enter API settings on Tappd's Settings Page (only from admin account).
 1. Use Widgets and Shortcodes!
 
 = GETTING STARTED =
