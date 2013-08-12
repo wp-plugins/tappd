@@ -625,7 +625,7 @@ register_sidebar_widget( 'Untappd userFeed', 'widget_myUserFeed');
 add_action( 'wp_enqueue_scripts', 'DR_add_stylesheet' );
 
 global $user_ID; if( $user_ID ) :
-if( current_user_can('level_10') ) :
+if( current_user_can('level_9') ) :
  
 	add_action( 'admin_init', 'DR_add_admin_stylesheet' );
 	add_action('admin_menu', 'DRTappd_admin_actions');
