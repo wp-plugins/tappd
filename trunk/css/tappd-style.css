@@ -1,0 +1,96 @@
+@import url(http://fonts.googleapis.com/css?family=Roboto:400,700,500);
+.untappduserfeed, .untappdvenuefeed, .untappdbreweryfeed, .untappdbeerfeed{
+    background-color: #fffed9;
+    border: 1px solid #9CC1AF;
+    border-radius: 6px;
+    -webkit-border-radius: 6px;
+    -moz-border-radius: 6px;
+    font-family: 'Roboto', sans-serif;
+    margin: 10px 0;
+    color: #444;
+    font-weight: bold;
+    max-width: 475px;
+    overflow: hidden;
+}
+
+.untappduserfeed a, .untappdvenuefeed a, .untappdbreweryfeed a, .untappdbeerfeed a{
+    text-decoration: none;
+    color: #8B4408;
+}
+.untappduserfeed .untappduserheading, .untappdvenuefeed .untappdvenueheading, .untappdbreweryfeed .untappdbreweryheading, .untappdbeerfeed .untappdbeerheading{
+    background: #EDB56B;
+    padding: 15px;
+}
+.untappdusername a, .untappdvenuename a, .untappdbreweryname a, .untappdbeername a{
+    text-transform: uppercase;
+    display: inline-block;
+    text-shadow: 1px 1px 1px #000;
+    font-weight: bold;
+}
+.untappduserfeed .untappduserheading a, .untappdvenuefeed .untappdvenueheading a, .untappdbreweryfeed .untappdbreweryheading a, .untappdbeerfeed .untappdbeerheading a{
+    text-decoration: none;
+    color: #FFFED9;
+}
+.untappduserfeed .untappduserheading a:hover, .untappdvenuefeed .untappdvenueheading a:hover, .untappdbreweryfeed .untappdbreweryheading a:hover, .untappdbeerfeed .untappdbeerheading a:hover{
+    text-decoration: none;
+    color: #59271B;
+    text-shadow: 1px 1px 1px #bbb;
+}
+.untappduserfeed .untappduserpic, .untappdvenuefeed .untappdvenuepic,  .untappdbreweryfeed .untappdbrewerypic, .untappdbeerfeed .untappdbeerpic{
+    display: inline-block;
+    width: 30%;
+}
+.untappduserfeed .untappduserpic img, .untappdvenuefeed .untappdvenuepic img, .untappdbreweryfeed .untappdbrewerypic img, .untappdbeerfeed .untappdbeerpic img{
+    overflow: hidden;
+    border-radius: 11px;
+    -webkit-border-radius: 11px;
+    -moz-border-radius: 11px;
+    width: 100%;
+    border: 1px solid #fffed9;
+    box-shadow: -2px 2px 3px #777;
+}
+.untappduserfeed .untappdusername, .untappdvenuefeed .untappdvenuename, .untappdbreweryfeed .untappdbreweryname, .untappdbeerfeed .untappdbeername{
+    display: inline-block;
+    vertical-align: top;
+    width: 63%;  
+    padding: 0 2%;
+}
+.untappduserfeed .untappdusername span.untappdbio{
+    font-size: .7em;
+    display: inline-block;
+    line-height: 16px;
+}
+.usercheckin, .venuecheckin, .brewerycheckin, .beercheckin{
+    padding: 15px;
+    border-bottom: 1px solid #9CC1AF;
+    border-top: 1px solid #fff;
+}
+
+.usercheckin .userbeerlabel, .venuecheckin .venueuserpic, .brewerycheckin .breweryuserpic, .beercheckin .beeruserpic{
+    display: inline-block;
+    width: 30%;
+
+}
+.usercheckin .userbeerlabel img, .venuecheckin .venueuserpic img, .brewerycheckin .breweryuserpic img, .beercheckin .beeruserpic img{
+    overflow: hidden;
+    border-radius: 11px;
+    -webkit-border-radius: 11px;
+    -moz-border-radius: 11px;
+    width: 100%;
+    border: 1px solid #9CC1AF;
+}
+
+.usercheckin .userbeername, .venuecheckin .venueusername, .brewerycheckin .breweryusername, .beercheckin .beerusername{
+    display: inline-block;
+    vertical-align: top;
+    width: 63%;  
+    padding: 0 2%;
+    font-size: .8em;
+    color: #555;
+}
+.branding{
+    text-align: center;
+    font-size: .7em;
+    background: #EDB56B;
+    padding: 4px 0;
+}
