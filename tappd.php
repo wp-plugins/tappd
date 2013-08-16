@@ -536,7 +536,7 @@ function Tappd_output($id, $feedtype, $limit){
                     $output .= '</a>';
                 $output .= '</div>';
                 $output .= '<div class="untappdbeername">';
-                    $output .= 'Checkins for <a href="https://untappd.com/beer/' . $feed->response->checkins->items[0]->beer->bid . '">' . $feed->response->checkins->items[0]->beer->beer_name' .</a> by <a href="' . $feed->response->checkins->items[0]->brewery->contact->url . '">' . $feed->response->checkins->items[0]->brewery->brewery_name . '</a>';
+                    $output .= 'Checkins for <a href="https://untappd.com/beer/' . $feed->response->checkins->items[0]->beer->bid . '">' . $feed->response->checkins->items[0]->beer->beer_name . '</a> by <a href="' . $feed->response->checkins->items[0]->brewery->contact->url . '">' . $feed->response->checkins->items[0]->brewery->brewery_name . '</a>';
                 $output .= '</div>';
             $output .= '</div>';
             $output .= '<div class="checkincontainer">';
