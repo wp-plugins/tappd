@@ -2,7 +2,7 @@
 /*
 Plugin Name: Tappd
 Description: Plugin to utilize Untappd's API
-Version: 1.0.3
+Version: 1.0.4
 Author: Digital Relativity
 Author URI: http://digitalrelativity.com/
 Plugin URI: http://digitalrelativity.com/untappd-wordpress-plugin/
@@ -403,171 +403,156 @@ function Tappd_output($id, $feedtype, $limit){
         $limit = 10;
     }
     
+    $output = '';
     $counter = 1;
     
     if($feedtype == 'userFeed' && $id != ''){
-?>
-        <div class="untappduserfeed">
-            <div class="untappduserheading">
-                <div class="untappduserpic" >
-                    <a href="http://untappd.com/user/<?php echo $feed->response->checkins->items[0]->user->user_name; ?>" >
-                        <img src="<?php echo htmlentities($feed->response->checkins->items[0]->user->user_avatar); ?>" alt="<?php echo $feed->response->checkins->items[0]->user->user_name; ?>" />
-                    </a>
-                </div>
-                <div class="untappdusername" >
-                    <a href="http://untappd.com/user/<?php echo $feed->response->checkins->items[0]->user->user_name; ?>" ><span class="untappdrealname"><?php echo $feed->response->checkins->items[0]->user->first_name; ?> <?php echo $feed->response->checkins->items[0]->user->last_name; ?></span></a>
-                    <?php if ($feed->response->checkins->items[0]->user->bio != '') { ?>
-                        <br><span class="untappdbio"><?php echo $feed->response->checkins->items[0]->user->bio; ?></span>
-                    <?php } ?>
-                </div>
-            </div>
-            <div class="checkincontainer">
-<?php       
+    
+        $output .= '<div class="untappduserfeed">';
+            $output .= '<div class="untappduserheading">';
+                $output .= '<div class="untappduserpic" >';
+                    $output .= '<a href="http://untappd.com/user/' . $feed->response->checkins->items[0]->user->user_name . '" >';
+                        $output .= '<img src="' . htmlentities($feed->response->checkins->items[0]->user->user_avatar). '" alt="' . $feed->response->checkins->items[0]->user->user_name . '" />';
+                    $output .= '</a>';
+                $output .= '</div>';
+                $output .= '<div class="untappdusername" >';
+                    $output .= '<a href="http://untappd.com/user/' . $feed->response->checkins->items[0]->user->user_name . '" ><span class="untappdrealname">' . $feed->response->checkins->items[0]->user->first_name . ' ' . $feed->response->checkins->items[0]->user->last_name . '</span></a>';
+                    	if ($feed->response->checkins->items[0]->user->bio != '') {
+                        	$output .= '<br><span class="untappdbio">' . $feed->response->checkins->items[0]->user->bio . '</span>';
+                        }
+                $output .= '</div>';
+            $output .= '</div>';
+            $output .= '<div class="checkincontainer">';
+       
         foreach ($feed->response->checkins->items as $i) { 
             if($counter <= $limit){      
-?> 
-                <div class="usercheckin">
-                     <div class="userbeerlabel">
-                          <img src="<?php echo $i->beer->beer_label; ?>" alt="<?php echo $i->beer->beer_name; ?>" />
-                     </div> 
-                     <div class="userbeername">
-                         <a href="https://untappd.com/beer/<?php echo $i->beer->bid; ?>"><?php echo $i->beer->beer_name; ?></a><br>
-                         <span>by <a href="<?php echo $i->brewery->contact->url; ?>"><?php echo $i->brewery->brewery_name; ?></a></span>         
-                     </div>  
-                </div>
-<?php
+                $output .= '<div class="usercheckin">';
+                     $output .= '<div class="userbeerlabel">';
+                          $output .= '<img src="' . $i->beer->beer_label . '" alt="' . $i->beer->beer_name . '" />';
+                     $output .= '</div>';
+                     $output .= '<div class="userbeername">';
+                         $output .= '<a href="https://untappd.com/beer/' . $i->beer->bid . '">' . $i->beer->beer_name . '</a><br>';
+                         $output .= '<span>by <a href="' . $i->brewery->contact->url . '">' . $i->brewery->brewery_name . '</a></span>';         
+                     $output .= '</div>';
+                $output .= '</div>';
             }
             else{
                 break;
             }
             $counter++; 
         }
-?>
-            </div>
-            <div class="branding">
-                <span>Data provided by <a href="http://untappd.com">Untappd</a></span>
-            </div>
-        </div>
-<?php
+            $output .= '</div>';
+            $output .= '<div class="branding">';
+                $output .= '<span>Data provided by <a href="http://untappd.com">Untappd</a></span>';
+            $output .= '</div>';
+        $output .= '</div>';
     }
     if($feedtype == 'venueFeed' && $id != ''){
-    ?>
-        <div class="untappdvenuefeed" >
-            <div class="untappdvenueheading">
-                <div class="untappdvenuepic" >
-                    <a href="https://untappd.com/venue/<?php echo $feed->response->checkins->items[0]->venue->venue_id; ?>" >
-                          <img src="https://maps.googleapis.com/maps/api/staticmap?size=100x100&amp;center=<?php echo $feed->response->checkins->items[0]->venue->location->lat; ?>,<?php echo $feed->response->checkins->items[0]->venue->location->lng; ?>&amp;sensor=false&amp;zoom=13&amp;markers=color:yellow|label:Venue|<?php echo $feed->response->checkins->items[0]->venue->location->lat; ?>,<?php echo $feed->response->checkins->items[0]->venue->location->lng; ?>" alt="<?php echo $feed->response->checkins->items[0]->venue->venue_name; ?>" />
-                    </a>
-                </div>
-                <div class="untappdvenuename">
-                    Checkins at <a href="https://untappd.com/venue/<?php echo $feed->response->checkins->items[0]->venue->venue_id; ?>" ><?php echo $feed->response->checkins->items[0]->venue->venue_name; ?></a>
-                </div>
-            </div>
-            <div class="checkincontainer">
-<?php
+        $output .= '<div class="untappdvenuefeed" >';
+            $output .= '<div class="untappdvenueheading">';
+                $output .= '<div class="untappdvenuepic" >';
+                    $output .= '<a href="https://untappd.com/venue/' . $feed->response->checkins->items[0]->venue->venue_id . '" >';
+                          $output .= '<img src="https://maps.googleapis.com/maps/api/staticmap?size=100x100&amp;center=' . $feed->response->checkins->items[0]->venue->location->lat . ',' . $feed->response->checkins->items[0]->venue->location->lng . '&amp;sensor=false&amp;zoom=13&amp;markers=color:yellow|label:Venue|' . $feed->response->checkins->items[0]->venue->location->lat . ',' . $feed->response->checkins->items[0]->venue->location->lng . '" alt="' . $feed->response->checkins->items[0]->venue->venue_name . '" />';
+                    $output .= '</a>';
+                $output .= '</div>';
+                $output .= '<div class="untappdvenuename">';
+                    $output .= 'Checkins at <a href="https://untappd.com/venue/' . $feed->response->checkins->items[0]->venue->venue_id . '" >' . $feed->response->checkins->items[0]->venue->venue_name . '</a>';
+                $output .= '</div>';
+            $output .= '</div>';
+            $output .= '<div class="checkincontainer">';
+
             foreach ($feed->response->checkins->items as $i) {
                 if($counter <= $limit){ 
-?>      
-                <div class="venuecheckin">
-                    <div class="venueuserpic" >
-                        <a href="http://untappd.com/user/<?php echo $i->user->user_name; ?>">
-                            <img src="<?php echo htmlentities($i->user->user_avatar); ?>" alt="<?php echo $i->user->user_name; ?>"/>
-                        </a>
-                    </div>
-                    <div class="venueusername">
-                        <a href="http://untappd.com/user/<?php echo $i->user->user_name; ?>" ><?php echo $i->user->user_name; ?></a> is drinking <a href="https://untappd.com/beer/<?php echo $i->beer->bid; ?>"><?php echo $i->beer->beer_name; ?></a> <span>by <a href="<?php echo $i->brewery->contact->url; ?>"><?php echo $i->brewery->brewery_name; ?></a></span> 
-                    </div>  
-                </div>       
-<?php 
+                $output .= '<div class="venuecheckin">';
+                    $output .= '<div class="venueuserpic" >';
+                        $output .= '<a href="http://untappd.com/user/' . $i->user->user_name . '">';
+                            $output .= '<img src="' . htmlentities($i->user->user_avatar) . '" alt="' . $i->user->user_name . '"/>';
+                        $output .= '</a>';
+                    $output .= '</div>';
+                    $output .= '<div class="venueusername">';
+                        $output .= '<a href="http://untappd.com/user/' . $i->user->user_name . '" >' . $i->user->user_name . '</a> is drinking <a href="https://untappd.com/beer/' . $i->beer->bid . '">' . $i->beer->beer_name . '</a> <span>by <a href="' . $i->brewery->contact->url . '">' . $i->brewery->brewery_name . '</a></span>';
+                    $output .= '</div>';
+                $output .= '</div>';      
                 }
                 else{
                     break;
                 }
                 $counter++; 
             }     
-?>
-            </div>
-            <div class="branding">
-                <span>Data provided by <a href="http://untappd.com">Untappd</a></span>
-            </div>
-        </div>
-<?php 
+            $output .= '</div>';
+            $output .= '<div class="branding">';
+                $output .= '<span>Data provided by <a href="http://untappd.com">Untappd</a></span>';
+            $output .= '</div>';
+        $output .= '</div>';
     }     
-    if($feedtype == 'breweryFeed' && $id != ''){  ?>
-        <div class="untappdbreweryfeed" >
-            <div class="untappdbreweryheading">
-                <div class="untappdbrewerypic">
-                    <a href="<?php echo $feed->response->checkins->items[0]->brewery->contact->url; ?>">
-                        <img src="<?php echo $feed->response->checkins->items[0]->brewery->brewery_label; ?>" alt="<?php echo $feed->response->checkins->items[0]->brewery->brewery_name; ?>" />
-                    </a>
-                </div>
-                <div class="untappdbreweryname">
-                    Checkins from 
-                    <a href="<?php echo $feed->response->checkins->items[0]->brewery->contact->url; ?>">
-                        <?php echo $feed->response->checkins->items[0]->brewery->brewery_name; ?>
-                    </a>
-                </div>
-            </div>
-            <div class="checkincontainer">
-<?php    
+    if($feedtype == 'breweryFeed' && $id != ''){
+        $output .= '<div class="untappdbreweryfeed" >';
+            $output .= '<div class="untappdbreweryheading">';
+                $output .= '<div class="untappdbrewerypic">';
+                    $output .= '<a href="' . $feed->response->checkins->items[0]->brewery->contact->url . '">';
+                        $output .= '<img src="' . $feed->response->checkins->items[0]->brewery->brewery_label . '" alt="' . $feed->response->checkins->items[0]->brewery->brewery_name . '" />';
+                    $output .= '</a>';
+                $output .= '</div>';
+                $output .= '<div class="untappdbreweryname">';
+                    $output .= 'Checkins from ';
+                    $output .= '<a href="' . $feed->response->checkins->items[0]->brewery->contact->url . '">';
+                        $output .= $feed->response->checkins->items[0]->brewery->brewery_name;
+                    $output .= '</a>';
+                $output .= '</div>';
+            $output .= '</div>';
+            $output .= '<div class="checkincontainer">';
+   
         foreach ($feed->response->checkins->items as $i) {
             if($counter <= $limit){ 
-?>
-                <div class="brewerycheckin">
-                    <div class="breweryuserpic" >
-                        <a href="http://untappd.com/user/<?php echo $i->user->user_name; ?>" >
-                           <img src="<?php echo htmlentities($i->user->user_avatar); ?>" alt="<?php echo $i->user->user_name; ?>" />
-                        </a>
-                    </div>
-                    <div class="breweryusername" >
-                        <a href="http://untappd.com/user/<?php echo $i->user->user_name; ?>" ><?php echo $i->user->user_name; ?></a> is drinking <a href="https://untappd.com/beer/<?php echo $i->beer->bid; ?>"><?php echo $i->beer->beer_name; ?></a>
-                    </div>    
-                </div>  
-<?php
+                $output .= '<div class="brewerycheckin">';
+                    $output .= '<div class="breweryuserpic" >';
+                        $output .= '<a href="http://untappd.com/user/' . $i->user->user_name . '" >';
+                           $output .= '<img src="' . htmlentities($i->user->user_avatar) . '" alt="' . $i->user->user_name . '" />';
+                        $output .= '</a>';
+                    $output .= '</div>';
+                    $output .= '<div class="breweryusername" >';
+                        $output .= '<a href="http://untappd.com/user/' . $i->user->user_name . '" >' . $i->user->user_name . '</a> is drinking <a href="https://untappd.com/beer/' . $i->beer->bid . '">' . $i->beer->beer_name . '</a>';
+                    $output .= '</div>';
+                $output .= '</div>';
             }
             else{
                 break;
             }
             $counter++; 
         }
-?>
-            </div>
-            <div class="branding">
-                <span>Data provided by <a href="http://untappd.com">Untappd</a></span>
-            </div>
-        </div>
-<?php
+            $output .= '</div>';
+            $output .= '<div class="branding">';
+                $output .= '<span>Data provided by <a href="http://untappd.com">Untappd</a></span>';
+            $output .= '</div>';
+        $output .= '</div>';
     }
     
     if($feedtype == 'beerFeed' && $id != ''){
-?>
-        <div class="untappdbeerfeed" >
-            <div class="untappdbeerheading">
-                <div class="untappdbeerpic">
-                    <a href="https://untappd.com/beer/<?php echo $feed->response->checkins->items[0]->beer->bid ?>">
-                        <img src="<?php echo $feed->response->checkins->items[0]->beer->beer_label; ?>" alt="<?php echo $feed->response->checkins->items[0]->beer->beer_name; ?>" />
-                    </a>
-                </div>
-                <div class="untappdbeername">
-                    Checkins for <a href="https://untappd.com/beer/<?php echo $feed->response->checkins->items[0]->beer->bid ?>"><?php echo $feed->response->checkins->items[0]->beer->beer_name; ?></a> by                   <a href="<?php echo $feed->response->checkins->items[0]->brewery->contact->url; ?>"><?php echo $feed->response->checkins->items[0]->brewery->brewery_name; ?></a>
-                </div>
-            </div>
-            <div class="checkincontainer">
-<?php
+        $output .= '<div class="untappdbeerfeed" >';
+            $output .= '<div class="untappdbeerheading">';
+                $output .= '<div class="untappdbeerpic">';
+                    $output .= '<a href="https://untappd.com/beer/' . $feed->response->checkins->items[0]->beer->bid . '">';
+                        $output .= '<img src="' . $feed->response->checkins->items[0]->beer->beer_label . '" alt="' . $feed->response->checkins->items[0]->beer->beer_name . '" />';
+                    $output .= '</a>';
+                $output .= '</div>';
+                $output .= '<div class="untappdbeername">';
+                    $output .= 'Checkins for <a href="https://untappd.com/beer/' . $feed->response->checkins->items[0]->beer->bid . '">' . $feed->response->checkins->items[0]->beer->beer_name' .</a> by <a href="' . $feed->response->checkins->items[0]->brewery->contact->url . '">' . $feed->response->checkins->items[0]->brewery->brewery_name . '</a>';
+                $output .= '</div>';
+            $output .= '</div>';
+            $output .= '<div class="checkincontainer">';
+
         foreach ($feed->response->checkins->items as $i) {  
             if($counter <= $limit){       
-?>
-                <div class="beercheckin">
-                    <div class="beeruserpic">
-                        <a href="http://untappd.com/user/<?php echo $i->user->user_name; ?>" >
-                            <img src="<?php echo htmlentities($i->user->user_avatar); ?>" alt="<?php echo $i->user->user_name; ?>" />
-                        </a>
-                    </div>
-                    <div class="beerusername" >
-                        <a href="http://untappd.com/user/<?php echo $i->user->user_name; ?>" ><?php echo $i->user->user_name; ?></a> is drinking <?php echo $i->beer->beer_name; ?>
-                    </div>
-                </div>
-<?php
+                $output .= '<div class="beercheckin">';
+                    $output .= '<div class="beeruserpic">';
+                        $output .= '<a href="http://untappd.com/user/' . $i->user->user_name . '" >';
+                            $output .= '<img src="' . htmlentities($i->user->user_avatar)' . " alt="' . $i->user->user_name . '" />';
+                        $output .= '</a>';
+                    $output .= '</div>';
+                    $output .= '<div class="beerusername" >';
+                        $output .= '<a href="http://untappd.com/user/' . $i->user->user_name . '" >' . $i->user->user_name . '</a> is drinking ' . $i->beer->beer_name;
+                    $output .= '</div>';
+                $output .= '</div>';
             }
             else{
                 break;
@@ -575,14 +560,15 @@ function Tappd_output($id, $feedtype, $limit){
             $counter++; 
             $beerentries = '';
         }
-?>
-            </div>
-            <div class="branding">
-                <span>Data provided by <a href="http://untappd.com">Untappd</a></span>
-            </div>
-        </div>
-<?php
+
+            $output .= '</div>';
+            $output .= '<div class="branding">';
+                $output .= '<span>Data provided by <a href="http://untappd.com">Untappd</a></span>';
+            $output .= '</div>';
+        $output .= '</div>';
     }
+    
+    return $output; //Thanks Seth!
 }
 
 function DR_add_stylesheet() {
