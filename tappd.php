@@ -546,7 +546,7 @@ function Tappd_output($id, $feedtype, $limit){
                 $output .= '<div class="beercheckin">';
                     $output .= '<div class="beeruserpic">';
                         $output .= '<a href="http://untappd.com/user/' . $i->user->user_name . '" >';
-                            $output .= '<img src="' . htmlentities($i->user->user_avatar)' . " alt="' . $i->user->user_name . '" />';
+                            $output .= '<img src="' . htmlentities($i->user->user_avatar) . '" alt="' . $i->user->user_name . '" />';
                         $output .= '</a>';
                     $output .= '</div>';
                     $output .= '<div class="beerusername" >';
