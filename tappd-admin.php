@@ -13,7 +13,7 @@
 		$druntappdusername = $_POST['druntpd_druntappdusername'];
 		update_option('druntpd_druntappdusername', $druntappdusername);
 		
-		$drbreweryid = $_POST['druntpd_breweryid'];
+		$drbreweryid = $_POST['druntpd_drbreweryid'];
 		update_option('druntpd_drbreweryid', $drbreweryid);
 
 		$drvenueid = $_POST['druntpd_drvenueid'];
@@ -82,9 +82,9 @@
                 <p class="description">(ex https://untappd.com/venue/<strong style="color: #DB5A18;">2009</strong>)</p>
             </td></tr>
             <tr valign="top"><th scope="row">
-                <label for="druntpd_drbeerd"><?php _e("Default Beer ID " ); ?></label>
+                <label for="druntpd_drbeerid"><?php _e("Default Beer ID " ); ?></label>
             </th><td>
-                <input type="text" name="druntpd_drbeerd" id="druntpd_drbeerd" value="<?php echo $drbeerid; ?>" size="50">
+                <input type="text" name="druntpd_drbeerid" id="druntpd_drbeerid" value="<?php echo $drbeerid; ?>" size="50">
                 <p class="description">(ex https://untappd.com/beer/<strong style="color: #DB5A18;">30257</strong>)</p>
             </td></tr>
         </table>

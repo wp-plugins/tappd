@@ -2,7 +2,7 @@
 /*
 Plugin Name: Tappd
 Description: Plugin to utilize Untappd's API
-Version: 1.0.8
+Version: 1.1.0
 Author: Digital Relativity
 Author URI: http://digitalrelativity.com/
 Plugin URI: http://digitalrelativity.com/untappd-wordpress-plugin/
@@ -197,7 +197,7 @@ function widget_DRTappd_Beer() {
 }
 function widget_myBeerFeed($args) {
     extract($args);
-    $options = get_option("widget_DRUntapped_Beer");
+    $options = get_option("widget_DRTappd_Beer");
      
     echo $before_widget;
     echo $before_title;
@@ -221,7 +221,7 @@ function widget_DRTappd_Brewery() {
 }
 function widget_myBreweryFeed($args) {
     extract($args);
-    $options = get_option("widget_DRUntapped_Brewery");
+    $options = get_option("widget_DRTappd_Brewery");
      
     echo $before_widget;
     echo $before_title;
@@ -245,7 +245,7 @@ function widget_DRTappd_Venue() {
 }
 function widget_myVenueFeed($args) {
     extract($args);
-    $options = get_option("widget_DRUntapped_Venue");
+    $options = get_option("widget_DRTappd_Venue");
      
     echo $before_widget;
     echo $before_title;
@@ -270,7 +270,7 @@ function widget_DRTappd_User() {
 }
 function widget_myUserFeed($args) {
     extract($args);
-    $options = get_option("widget_DRUntapped_User");
+    $options = get_option("widget_DRTappd_User");
      
     echo $before_widget;
     echo $before_title;
