@@ -2,7 +2,7 @@
 /*
 Plugin Name: Tappd
 Description: Plugin to utilize Untappd's API
-Version: 1.1.0
+Version: 1.1.2
 Author: Digital Relativity
 Author URI: http://digitalrelativity.com/
 Plugin URI: http://digitalrelativity.com/untappd-wordpress-plugin/
@@ -193,7 +193,7 @@ function widget_DRTappd_Beer() {
     $id = $options['id'];
     $limit = $options['limit'];
     $feedtype = 'beerFeed';
-    Tappd_output($id,$feedtype,$limit);
+    echo Tappd_output($id,$feedtype,$limit);
 }
 function widget_myBeerFeed($args) {
     extract($args);
@@ -217,7 +217,7 @@ function widget_DRTappd_Brewery() {
     $id = $options['id'];
     $limit = $options['limit'];
     $feedtype = 'breweryFeed';
-    Tappd_output($id,$feedtype,$limit);
+    echo Tappd_output($id,$feedtype,$limit);
 }
 function widget_myBreweryFeed($args) {
     extract($args);
@@ -241,7 +241,7 @@ function widget_DRTappd_Venue() {
     $id = $options['id'];
     $limit = $options['limit'];
     $feedtype = 'venueFeed';
-    Tappd_output($id,$feedtype,$limit);
+    echo Tappd_output($id,$feedtype,$limit);
 }
 function widget_myVenueFeed($args) {
     extract($args);
@@ -266,7 +266,7 @@ function widget_DRTappd_User() {
     $id = $options['id'];
     $limit = $options['limit'];
     $feedtype = 'userFeed';
-    Tappd_output($id,$feedtype,$limit);
+    echo Tappd_output($id,$feedtype,$limit);
 }
 function widget_myUserFeed($args) {
     extract($args);
@@ -293,7 +293,7 @@ function beer_shortcode($atts) {
     ), $atts));
     
     $feedtype = 'beerFeed';
-    Tappd_output($id,$feedtype,$limit);
+    echo Tappd_output($id,$feedtype,$limit);
 }
 
 //Brewery
@@ -304,7 +304,7 @@ function brewery_shortcode($atts) {
     ), $atts));
     
     $feedtype = 'breweryFeed';
-    Tappd_output($id,$feedtype,$limit);
+    echo Tappd_output($id,$feedtype,$limit);
 }
 
 //Venue
@@ -315,7 +315,7 @@ function venue_shortcode($atts) {
     ), $atts));
     
     $feedtype = 'venueFeed';
-    Tappd_output($id,$feedtype,$limit);
+    echo Tappd_output($id,$feedtype,$limit);
 }
 
 //User
@@ -326,7 +326,7 @@ function user_shortcode($atts) {
     ), $atts));
     
     $feedtype = 'userFeed';
-    Tappd_output($id,$feedtype,$limit);
+    echo Tappd_output($id,$feedtype,$limit);
     
 }
 
