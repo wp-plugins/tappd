@@ -1,5 +1,5 @@
 === Tappd ===
-Contributors: rustyfelty, martinbowling, digitalrelativity
+Contributors: digitalrelativity, developerjustin
 Tags: untappd plugin, tappd, untappd, craft beer, beer feed, untappd feed
 Website: http://digitalrelativity.com/untappd-wordpress-plugin
 Donate link: http://digitalrelativity.com/

@@ -2,15 +2,15 @@
 /*
 Plugin Name: Tappd
 Description: Plugin to utilize Untappd's API
-Version: 1.1.2
+Version: 1.3
 Author: Digital Relativity
-Author URI: http://digitalrelativity.com/
-Plugin URI: http://digitalrelativity.com/untappd-wordpress-plugin/
+Author URI: https://digitalrelativity.com/
+Plugin URI: https://digitalrelativity.com/untappd-wordpress-plugin/
 */
 
 class DR_Tappd
 {
-    const URI_BASE = 'http://api.untappd.com/v4';
+    const URI_BASE = 'https://api.untappd.com/v4';
     protected $_clientId = '';
     protected $_clientSecret = '';
     protected $_redirectUri = '';
@@ -110,7 +110,7 @@ class DR_Tappd
             }
         }
 
-        if (preg_match('/^http/i', $method)) {
+        if (preg_match('/^https/i', $method)) {
             $this->_lastRequestUri = $method;
         } else {
             $this->_lastRequestUri = self::URI_BASE . '/' . $method;
@@ -138,13 +138,13 @@ class DR_Tappd
         // Response comes back as JSON, so we decode it into a stdClass object
         $this->_lastParsedResponse = json_decode($this->_lastRawResponse);
 
-        // If the http_code var is not found, the response from the server was unparsable
+        // If the https_code var is not found, the response from the server was unparsable
         if (!isset($this->_lastParsedResponse->meta->code)) {
 
             echo 'Error parsing response from server.';
         }
 
-        // Server provides error messages in http_code and error vars.  If not 200, we have an error.
+        // Server provides error messages in https_code and error vars.  If not 200, we have an error.
         if ($this->_lastParsedResponse->meta->code != '200') {
 
             echo 'Untappd Service Error ' .
@@ -406,17 +406,19 @@ function Tappd_output($id, $feedtype, $limit){
     $output = '';
     $counter = 1;
     
+    //print_r($feed);
+    
     if($feedtype == 'userFeed' && $id != ''){
     
         $output .= '<div class="untappduserfeed">';
             $output .= '<div class="untappduserheading">';
                 $output .= '<div class="untappduserpic" >';
-                    $output .= '<a href="http://untappd.com/user/' . $feed->response->checkins->items[0]->user->user_name . '" >';
+                    $output .= '<a href="https://untappd.com/user/' . $feed->response->checkins->items[0]->user->user_name . '" >';
                         $output .= '<img src="' . htmlentities($feed->response->checkins->items[0]->user->user_avatar). '" alt="' . $feed->response->checkins->items[0]->user->user_name . '" />';
                     $output .= '</a>';
                 $output .= '</div>';
                 $output .= '<div class="untappdusername" >';
-                    $output .= '<a href="http://untappd.com/user/' . $feed->response->checkins->items[0]->user->user_name . '" ><span class="untappdrealname">' . $feed->response->checkins->items[0]->user->first_name . ' ' . $feed->response->checkins->items[0]->user->last_name . '</span></a>';
+                    $output .= '<a href="https://untappd.com/user/' . $feed->response->checkins->items[0]->user->user_name . '" ><span class="untappdrealname">' . $feed->response->checkins->items[0]->user->first_name . ' ' . $feed->response->checkins->items[0]->user->last_name . '</span></a>';
                     	if ($feed->response->checkins->items[0]->user->bio != '') {
                         	$output .= '<br><span class="untappdbio">' . $feed->response->checkins->items[0]->user->bio . '</span>';
                         }
@@ -431,7 +433,7 @@ function Tappd_output($id, $feedtype, $limit){
                           $output .= '<img src="' . $i->beer->beer_label . '" alt="' . $i->beer->beer_name . '" />';
                      $output .= '</div>';
                      $output .= '<div class="userbeername">';
-                         $output .= '<a href="https://untappd.com/beer/' . $i->beer->bid . '">' . $i->beer->beer_name . '</a><br>';
+                         $output .= '<a href="httpss://untappd.com/beer/' . $i->beer->bid . '">' . $i->beer->beer_name . '</a><br>';
                          $output .= '<span>by <a href="' . $i->brewery->contact->url . '">' . $i->brewery->brewery_name . '</a></span>';         
                      $output .= '</div>';
                 $output .= '</div>';
@@ -443,7 +445,7 @@ function Tappd_output($id, $feedtype, $limit){
         }
             $output .= '</div>';
             $output .= '<div class="branding">';
-                $output .= '<span>Data provided by <a href="http://untappd.com">Untappd</a></span>';
+                $output .= '<span>Data provided by <a href="https://untappd.com">Untappd</a></span>';
             $output .= '</div>';
         $output .= '</div>';
     }
@@ -451,12 +453,12 @@ function Tappd_output($id, $feedtype, $limit){
         $output .= '<div class="untappdvenuefeed" >';
             $output .= '<div class="untappdvenueheading">';
                 $output .= '<div class="untappdvenuepic" >';
-                    $output .= '<a href="https://untappd.com/venue/' . $feed->response->checkins->items[0]->venue->venue_id . '" >';
-                          $output .= '<img src="https://maps.googleapis.com/maps/api/staticmap?size=100x100&amp;center=' . $feed->response->checkins->items[0]->venue->location->lat . ',' . $feed->response->checkins->items[0]->venue->location->lng . '&amp;sensor=false&amp;zoom=13&amp;markers=color:yellow|label:Venue|' . $feed->response->checkins->items[0]->venue->location->lat . ',' . $feed->response->checkins->items[0]->venue->location->lng . '" alt="' . $feed->response->checkins->items[0]->venue->venue_name . '" />';
+                    $output .= '<a href="httpss://untappd.com/venue/' . $feed->response->checkins->items[0]->venue->venue_id . '" >';
+                          $output .= '<img src="httpss://maps.googleapis.com/maps/api/staticmap?size=100x100&amp;center=' . $feed->response->checkins->items[0]->venue->location->lat . ',' . $feed->response->checkins->items[0]->venue->location->lng . '&amp;sensor=false&amp;zoom=13&amp;markers=color:yellow|label:Venue|' . $feed->response->checkins->items[0]->venue->location->lat . ',' . $feed->response->checkins->items[0]->venue->location->lng . '" alt="' . $feed->response->checkins->items[0]->venue->venue_name . '" />';
                     $output .= '</a>';
                 $output .= '</div>';
                 $output .= '<div class="untappdvenuename">';
-                    $output .= 'Checkins at <a href="https://untappd.com/venue/' . $feed->response->checkins->items[0]->venue->venue_id . '" >' . $feed->response->checkins->items[0]->venue->venue_name . '</a>';
+                    $output .= 'Checkins at <a href="httpss://untappd.com/venue/' . $feed->response->checkins->items[0]->venue->venue_id . '" >' . $feed->response->checkins->items[0]->venue->venue_name . '</a>';
                 $output .= '</div>';
             $output .= '</div>';
             $output .= '<div class="checkincontainer">';
@@ -465,12 +467,12 @@ function Tappd_output($id, $feedtype, $limit){
                 if($counter <= $limit){ 
                 $output .= '<div class="venuecheckin">';
                     $output .= '<div class="venueuserpic" >';
-                        $output .= '<a href="http://untappd.com/user/' . $i->user->user_name . '">';
+                        $output .= '<a href="https://untappd.com/user/' . $i->user->user_name . '">';
                             $output .= '<img src="' . htmlentities($i->user->user_avatar) . '" alt="' . $i->user->user_name . '"/>';
                         $output .= '</a>';
                     $output .= '</div>';
                     $output .= '<div class="venueusername">';
-                        $output .= '<a href="http://untappd.com/user/' . $i->user->user_name . '" >' . $i->user->user_name . '</a> is drinking <a href="https://untappd.com/beer/' . $i->beer->bid . '">' . $i->beer->beer_name . '</a> <span>by <a href="' . $i->brewery->contact->url . '">' . $i->brewery->brewery_name . '</a></span>';
+                        $output .= '<a href="https://untappd.com/user/' . $i->user->user_name . '" >' . $i->user->user_name . '</a> is drinking <a href="httpss://untappd.com/beer/' . $i->beer->bid . '">' . $i->beer->beer_name . '</a> <span>by <a href="' . $i->brewery->contact->url . '">' . $i->brewery->brewery_name . '</a></span>';
                     $output .= '</div>';
                 $output .= '</div>';      
                 }
@@ -481,7 +483,7 @@ function Tappd_output($id, $feedtype, $limit){
             }     
             $output .= '</div>';
             $output .= '<div class="branding">';
-                $output .= '<span>Data provided by <a href="http://untappd.com">Untappd</a></span>';
+                $output .= '<span>Data provided by <a href="https://untappd.com">Untappd</a></span>';
             $output .= '</div>';
         $output .= '</div>';
     }     
@@ -501,17 +503,17 @@ function Tappd_output($id, $feedtype, $limit){
                 $output .= '</div>';
             $output .= '</div>';
             $output .= '<div class="checkincontainer">';
-   
+
         foreach ($feed->response->checkins->items as $i) {
             if($counter <= $limit){ 
                 $output .= '<div class="brewerycheckin">';
                     $output .= '<div class="breweryuserpic" >';
-                        $output .= '<a href="http://untappd.com/user/' . $i->user->user_name . '" >';
+                        $output .= '<a href="https://untappd.com/user/' . $i->user->user_name . '" >';
                            $output .= '<img src="' . htmlentities($i->user->user_avatar) . '" alt="' . $i->user->user_name . '" />';
                         $output .= '</a>';
                     $output .= '</div>';
                     $output .= '<div class="breweryusername" >';
-                        $output .= '<a href="http://untappd.com/user/' . $i->user->user_name . '" >' . $i->user->user_name . '</a> is drinking <a href="https://untappd.com/beer/' . $i->beer->bid . '">' . $i->beer->beer_name . '</a>';
+                        $output .= '<a href="https://untappd.com/user/' . $i->user->user_name . '" >' . $i->user->user_name . '</a> is drinking <a href="httpss://untappd.com/beer/' . $i->beer->bid . '">' . $i->beer->beer_name . '</a>';
                     $output .= '</div>';
                 $output .= '</div>';
             }
@@ -522,7 +524,7 @@ function Tappd_output($id, $feedtype, $limit){
         }
             $output .= '</div>';
             $output .= '<div class="branding">';
-                $output .= '<span>Data provided by <a href="http://untappd.com">Untappd</a></span>';
+                $output .= '<span>Data provided by <a href="https://untappd.com">Untappd</a></span>';
             $output .= '</div>';
         $output .= '</div>';
     }
@@ -531,12 +533,12 @@ function Tappd_output($id, $feedtype, $limit){
         $output .= '<div class="untappdbeerfeed" >';
             $output .= '<div class="untappdbeerheading">';
                 $output .= '<div class="untappdbeerpic">';
-                    $output .= '<a href="https://untappd.com/beer/' . $feed->response->checkins->items[0]->beer->bid . '">';
+                    $output .= '<a href="httpss://untappd.com/beer/' . $feed->response->checkins->items[0]->beer->bid . '">';
                         $output .= '<img src="' . $feed->response->checkins->items[0]->beer->beer_label . '" alt="' . $feed->response->checkins->items[0]->beer->beer_name . '" />';
                     $output .= '</a>';
                 $output .= '</div>';
                 $output .= '<div class="untappdbeername">';
-                    $output .= 'Checkins for <a href="https://untappd.com/beer/' . $feed->response->checkins->items[0]->beer->bid . '">' . $feed->response->checkins->items[0]->beer->beer_name . '</a> by <a href="' . $feed->response->checkins->items[0]->brewery->contact->url . '">' . $feed->response->checkins->items[0]->brewery->brewery_name . '</a>';
+                    $output .= 'Checkins for <a href="httpss://untappd.com/beer/' . $feed->response->checkins->items[0]->beer->bid . '">' . $feed->response->checkins->items[0]->beer->beer_name . '</a> by <a href="' . $feed->response->checkins->items[0]->brewery->contact->url . '">' . $feed->response->checkins->items[0]->brewery->brewery_name . '</a>';
                 $output .= '</div>';
             $output .= '</div>';
             $output .= '<div class="checkincontainer">';
@@ -545,12 +547,12 @@ function Tappd_output($id, $feedtype, $limit){
             if($counter <= $limit){       
                 $output .= '<div class="beercheckin">';
                     $output .= '<div class="beeruserpic">';
-                        $output .= '<a href="http://untappd.com/user/' . $i->user->user_name . '" >';
+                        $output .= '<a href="https://untappd.com/user/' . $i->user->user_name . '" >';
                             $output .= '<img src="' . htmlentities($i->user->user_avatar) . '" alt="' . $i->user->user_name . '" />';
                         $output .= '</a>';
                     $output .= '</div>';
                     $output .= '<div class="beerusername" >';
-                        $output .= '<a href="http://untappd.com/user/' . $i->user->user_name . '" >' . $i->user->user_name . '</a> is drinking ' . $i->beer->beer_name;
+                        $output .= '<a href="https://untappd.com/user/' . $i->user->user_name . '" >' . $i->user->user_name . '</a> is drinking ' . $i->beer->beer_name;
                     $output .= '</div>';
                 $output .= '</div>';
             }
@@ -563,7 +565,7 @@ function Tappd_output($id, $feedtype, $limit){
 
             $output .= '</div>';
             $output .= '<div class="branding">';
-                $output .= '<span>Data provided by <a href="http://untappd.com">Untappd</a></span>';
+                $output .= '<span>Data provided by <a href="https://untappd.com">Untappd</a></span>';
             $output .= '</div>';
         $output .= '</div>';
     }
